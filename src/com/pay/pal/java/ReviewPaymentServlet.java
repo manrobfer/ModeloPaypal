@@ -15,8 +15,9 @@ import com.paypal.base.rest.PayPalRESTException;
 
 @WebServlet("/review_payment")
 public class ReviewPaymentServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
+	private static final long serialVersionUID = 1L;       
+	
+	
     public ReviewPaymentServlet() {
         super();
     
@@ -24,8 +25,7 @@ public class ReviewPaymentServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
 		String paymentId = request.getParameter("paymentId");
-		String payerId   = request.getParameter("payerID");
-		
+		String payerId   = request.getParameter("PayerID");			
 		
 		try {
 			
@@ -41,7 +41,8 @@ public class ReviewPaymentServlet extends HttpServlet {
 		    request.setAttribute("transaction",transaction);
 		    request.setAttribute("shippingAddress",shippingAddress);
 		    
-		    String url = "review.jsp?paymentId= " + paymentId + "&PayerID=" + payerId;
+		    String url = "review.jsp?paymentId=" + paymentId + "&PayerID=" + payerId;		    
+		    
 		    
 		    request.getRequestDispatcher(url).forward(request,response);
 		    
@@ -54,7 +55,7 @@ public class ReviewPaymentServlet extends HttpServlet {
 		}
 		
 		
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		response.getWriter().append("Servido em: ").append(request.getContextPath());
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

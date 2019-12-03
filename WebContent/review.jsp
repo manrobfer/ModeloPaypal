@@ -11,6 +11,11 @@
         <h3> Revisar Iten Antes do Pagamento</h3>
         <form action="execute_payment" method="post">
         <table>
+           <td>
+                <input type="hidden" name="paymentId" value="${param.paymentId}" />
+                <input type="hidden" name="payerId" value="${param.PayerID}" />
+           </td>        
+         
            <tr>
               <td>Detalhes da Transação </td>
               <td></td>
@@ -18,7 +23,7 @@
            </tr>           
            <tr>
               <td colspan="2"><b>Descrição da Transação</b> </td>
-              <td>${transaction.desciption} </td>
+              <td>${transaction.description} </td>
            </tr>        
            <tr>
               <td>Subtotal </td>
@@ -30,7 +35,7 @@
            </tr>
            <tr>
               <td>Imposto </td>
-              <td>${transaction.amount.tax} </td>
+              <td>${transaction.amount.details.tax} </td>
            </tr>
            
            <tr>
@@ -51,7 +56,7 @@
            </tr>
            <tr>
               <td>Sobrenome </td>
-              <td>${payer.lastLame} </td>
+              <td>${payer.lastName} </td>
            </tr>
            <tr>
               <td>E-mail </td>
@@ -88,9 +93,12 @@
            <tr>
               <td>Codigo Postal </td>
               <td>${shippingAddress.postalCode} </td>
-           </tr>                      
+           </tr> 
+           <tr>
+              <td></td>
+           </tr>                     
            <tr>        
-              <td><input type="submit" value="Pagar" /> </td>
+              <td><input type="submit" value="Pagar Agora" /> </td>
            </tr>               
         
         </table>

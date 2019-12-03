@@ -19,25 +19,25 @@ import com.paypal.base.rest.PayPalRESTException;
 public class ExecutePayment extends HttpServlet {
 	private static final long serialVersionUID = 1L;       
     
+	
+	
     public ExecutePayment() {
         super();
     
     }
-
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		// 
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 		
 		String paymentId = request.getParameter("paymentId");
-	    String payerId = request.getParameter("PayerID");
+	    String payerId = request.getParameter("payerId");    
+	   
 	    
 	    try {
+	    	
             PaymentServices paymentServices = new PaymentServices();
-            Payment payment = paymentServices.executePayment(paymentId, payerId);
+            Payment payment = paymentServices.executePayment(paymentId,payerId);
              
             PayerInfo payerInfo = payment.getPayer().getPayerInfo();
             Transaction transaction = payment.getTransactions().get(0);
@@ -48,7 +48,7 @@ public class ExecutePayment extends HttpServlet {
             request.getRequestDispatcher("receipt.jsp").forward(request, response);
              
         } catch (PayPalRESTException ex) {
-            request.setAttribute("errorMessage", ex.getMessage());
+            request.setAttribute("errorMessage", "Não foi possivel pagar \n "+ex.getMessage());
             ex.printStackTrace();
             request.getRequestDispatcher("error.jsp").forward(request, response);
         }

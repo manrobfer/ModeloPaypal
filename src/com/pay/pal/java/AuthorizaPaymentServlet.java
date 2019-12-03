@@ -30,15 +30,20 @@ public class AuthorizaPaymentServlet extends HttpServlet {
 		String tax = request.getParameter("tax");
 		String total = request.getParameter("total");
 		
+		
+		
 		OrderDetail orderDetail = new OrderDetail(product,subtotal,shipping,tax,total);
 		
 		
 		try {
 		    PaymentServices paymentService = new PaymentServices();
-		    String approvalLink = paymentService.authorizaPayment(orderDetail);		
+		    String approvalLink = paymentService.authorizaPayment(orderDetail);		    
+		   
+		    
 		    response.sendRedirect(approvalLink);
 		    
 		}catch(PayPalRESTException prex) {
+			
 			prex.printStackTrace();
 			request.setAttribute("errorMessage","Informações de pagamento inválidas");
 			request.getRequestDispatcher("error.jsp").forward(request,response);

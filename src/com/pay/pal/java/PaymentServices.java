@@ -19,8 +19,8 @@ import com.paypal.base.rest.PayPalRESTException;
 
 public class PaymentServices {
 	
-	private static final String client_id = "AQz47ncnzBzIh5UDC-xmmBrUi6ItSW5s-sb5LyS5AywAUUYh35u4jygvU2cvkxamhgwMTWE_C_v6fQ_T";
-	private static final String client_secret = "EJwG68FCFuEPMwxcE7mcsWapsKn2OaO6eIXb0uTekNGz3OB5wwdHPYb3VtYR9l5sdzSUlz5eImxU9Iy4";
+	private static final String client_id = "AfDu2HdA36AWIdKM2Dn6L4VYzhpWYYqBgqfxtgA4l072rDj8vpL44FHxIFjV98Rf6FHfnGnRpkbRGoTz";
+	private static final String client_secret = "EPg3DlNSjegS5v4Xhq9sxGMDUDUBoxilLxAUqwF4dnWk13khy7b-fdJOrKra0RlZ8Rwa0R8cBrtW4a29";
 	private static final String MODE = "sandbox";
 	
 	public String authorizaPayment(OrderDetail orderDatail) throws PayPalRESTException {
@@ -94,9 +94,8 @@ public class PaymentServices {
 	
 	private RedirectUrls getRedirectUrls() {
 		RedirectUrls redirectUrls = new RedirectUrls();
-		             redirectUrls.setCancelUrl("http://localhost:8080/ThePayPalExample/cancel.html");
-		             //redirectUrls.setReturnUrl("http://localhost:8080/ThePayPalExample/review_payment.html");
-		             redirectUrls.setReturnUrl("http://localhost:8080/ThePayPalExample/review.jsp");
+		             redirectUrls.setCancelUrl("http://localhost:8080/ThePayPalExample/cancel.html");		            
+		             redirectUrls.setReturnUrl("http://localhost:8080/ThePayPalExample/review_payment");
 		
 		return redirectUrls;
 	}
@@ -116,7 +115,7 @@ public class PaymentServices {
 		PayerInfo payerInfo = new PayerInfo();
 		          payerInfo.setFirstName("Manoel")
 		                   .setLastName("Ferreira")
-		                   .setEmail("sb-3tuge230654@business.example.com");
+		                   .setEmail("manrobfer@yahoo.com.br");
 		                   
 		
 		payer.setPayerInfo(payerInfo);
@@ -133,7 +132,8 @@ public class PaymentServices {
 	 
 	        Payment payment = new Payment().setId(paymentId);
 	 
-	        APIContext apiContext = new APIContext(client_id,client_secret,MODE);
+	        APIContext apiContext = new APIContext(client_id,client_secret,MODE);	        
+	        
 	 
 	        return payment.execute(apiContext, paymentExecution);
 	}
